@@ -81,6 +81,18 @@ self.paddle1 = Paddle(20, WINDOW_HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH,
     def draw(self, surface):
         pygame.draw.circle(surface, self.color, self.rect.center, BALL_SIZE // 2)
 
+              if self.rect.top < 0:
+            self.rect.top = 0
+        if self.rect.bottom > WINDOW_HEIGHT:
+            self.rect.bottom = WINDOW_HEIGHT
+
+       if self.rect.top <= 0:
+            self.rect.top = 0
+            self.velocity_y = abs(self.velocity_y)
+        if self.rect.bottom >= WINDOW_HEIGHT:
+            self.rect.bottom = WINDOW_HEIGHT
+            self.velocity_y = -abs(self.velocity_y)
+            
         while running:
           # Handle events
             for event in pygame.event.get():
