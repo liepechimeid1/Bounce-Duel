@@ -92,7 +92,17 @@ self.paddle1 = Paddle(20, WINDOW_HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH,
         if self.rect.bottom >= WINDOW_HEIGHT:
             self.rect.bottom = WINDOW_HEIGHT
             self.velocity_y = -abs(self.velocity_y)
-            
+
+     def check_collisions(self):
+        """Check ball collisions with paddles"""
+        if self.ball.rect.colliderect(self.paddle1.rect):
+            self.ball.rect.left = self.paddle1.rect.right  # Prevent ball sticking
+            self.handle_paddle_collision(self.paddle1)
+
+        if self.ball.rect.colliderect(self.paddle2.rect):
+            self.ball.rect.right = self.paddle2.rect.left  # Prevent ball sticking
+            self.handle_paddle_collision(self.paddle2)
+                       
         while running:
           # Handle events
             for event in pygame.event.get():
